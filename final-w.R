@@ -15,11 +15,9 @@ s <- x[[1]] #question 4 returning 1st entry to x
 
 
 class(x)
-
-
-
 class(s)
 length(s)
 nrow(s)
-s
-str_trim()
+t <- str_trim(s)
+identical(s, t)
+

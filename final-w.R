@@ -21,3 +21,4 @@ nrow(s)
 t <- str_trim(s)
 identical(s, t)
 
+#poppy seeds

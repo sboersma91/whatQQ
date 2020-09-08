@@ -30,12 +30,12 @@ tmp <- gather(admissions, key, value, admitted:applicants)
 
 
 unite(tmp, column_name, c(key, gender))
-state   	     population
-Alabama             4779736
-Alaska     	         710231
-Arizona    	        6392017
-Delaware     	     897934
-District of Columbia 601723
+# state   	     population
+# Alabama             4779736
+# Alaska     	         710231
+# Arizona    	        6392017
+# Delaware     	     897934
+# District of Columbia 601723
 
 state <- c("Alabama", "Alaska", "Arizona", "Delaware", "District of Colombia")
 pop <- c(4779736, 710231, 6391017, 8979343, 601723)

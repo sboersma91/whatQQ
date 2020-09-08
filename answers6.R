@@ -4,7 +4,7 @@ options(digits = 3)
 
 fn <- system.file("extdata", "RD-Mortality-Report_2015-18-180531.pdf", package="dslabs")
 
-system("cmd.exe", input = paste("start", fn))
+# system("cmd.exe", input = paste("start", fn))
 txt <- pdf_text(fn)
 x <- str_split(txt[9], "\n")
 s <- x[[1]]
@@ -52,4 +52,19 @@ tab <- s %>%
   mutate_all(as.numeric)
 mean(tab$"2015")
 
+tab <- tab %>% gather(year, deaths, -day) %>%
+  mutate(deaths = as.numeric(deaths))
+tab
 
+tab %>% 
+  ggplot(aes(day,deaths, col = year)) +
+  geom_line()  + 
+  geom_vline(xintercept = 20)
+
+mean(tab$"2015")
+mean(tab$'2016')
+b <- tab %>% filter(year == 2015) %>% pull(deaths)
+mean(b)
+c <- tab %>% filter(year == 2016) %>% pull(deaths)
+mean(c)
+tab %>% filter(deaths >= 100)

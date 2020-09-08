@@ -25,3 +25,31 @@ tmp
 tmp[1]
 
 tail_index <- str_which(s, "Total")
+
+n <- str_count(s, "\\d+")
+sum( n == 1)
+
+
+no_header <- gsub( '.*', '',s)
+no_header
+s
+s[2]
+tail_index
+header_index
+
+out <- c(1:header_index, which(n==1), tail_index:length(s))
+s <- s[-out]
+length(s)
+s
+
+
+s <- str_split_fixed(s, "\\s+", n = 6)[,1:5]
+
+
+tab <- s %>% 
+  as_data_frame() %>% 
+  setNames(c("day", header)) %>%
+  mutate_all(as.numeric)
+mean(tab$"2015")
+
+

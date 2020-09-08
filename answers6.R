@@ -23,3 +23,5 @@ month
 header[3]
 tmp
 tmp[1]
+
+tail_index <- str_which(s, "Total")

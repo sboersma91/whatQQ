@@ -18,3 +18,10 @@ length(t) #40
 header_index  <- str_which(t, "2015")
 month <- str_split(header_index, "month",simplify = TRUE)
 month
+
+tail_index <- str_which(s, "Total")
+
+n <- str_count(s, "\\d+")
+sum( n == 1)
+
+

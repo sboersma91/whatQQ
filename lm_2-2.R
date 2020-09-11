@@ -58,12 +58,6 @@ model <- lm(son ~ father, data = galton_heights)
 predictions <- predict(model)
 data <- as.tibble(predictions) %>% bind_cols(father = galton_heights$father)
 
-ggplot(data, aes(x = father, y = fit)) +
-  geom_line(color = "blue", size = 1) + 
-  geom_point(data = galton_heights, aes(x = father, y = son))
-
-
-
 
 
 

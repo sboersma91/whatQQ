@@ -34,10 +34,31 @@ jazzyjazz %>% filter(playerID == "alexama02")
 head(jazzyjazz)
 
 
-inner_join(jazzyjazz, bat_02)
+ball <- inner_join(jazzyjazz, bat_02)
+p_singles <- mean(scale(ball$singles)*scale(ball$singles_avg))
+p_bb <- mean(scale(ball$bb)*scale(ball$bb_avg))
+p_singles
+p_bb
 
+avgsingles <-mean(female_heights$mother)
+momsd <- sd(female_heights$mother)
+avgdau <- mean(female_heights$daughter)
+dausd <- sd(female_heights$daughter)
 
+corr <- mean(scale(female_heights$mother)*scale(female_heights$daughter))
+m <- corr*drought/monsum
 
+#slope
+corr*dausd/momsd
+
+#intercept
+b <- avgmom-m*avgdau
+
+# inch change
+momsd/dausd
+
+avgmom+corr*(60-avgdau)/dausd*momsd
+(corr^2)
 
 
 

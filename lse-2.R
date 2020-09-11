@@ -25,22 +25,12 @@ daughter_avg <- mean(female_heights$daughter)
 daughter_sd <- sd(female_heights$daughter)
 
 p <- mean(scale(female_heights$mother)*scale(female_heights$daughter))
-# m2 <- p*
-drought
+m2 <- p*mom_sd/daughter_sd
+m2
+b <- daughter_avg-m2*mom_avg
+b
+mom_avg-m2*daughter_avg
 
-# corr <- mean(scale(female_heights$mother)*scale(female_heights$daughter))
-# m <- corr*drought/monsum
+# predicting Mother daughter = 69
+mom_avg+ p * (69 - daughter_avg)/daughter_sd *mom_sd
 
-
-
-# #slope
-# corr*dausd/momsd
-# 
-# #intercept
-# b <- avgmom-m*avgdau
-# 
-# # inch change
-# momsd/dausd
-# 
-# avgmom+corr*(60-avgdau)/dausd*momsd
-# (corr^2)

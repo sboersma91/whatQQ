@@ -1,4 +1,11 @@
 library(Lahman)
+library(tidyverse)
+library(dslabs)
+library(HistData)
+set.seed(1989, sample.kind="Rounding") #if you are using R 3.6 or later
+library(HistData)
+data("GaltonFamilies")
+options(digits = 3)    # report 3 significant digits
 bat_02 <- Batting %>% filter(yearID == 2002) %>%
   mutate(pa = AB + BB, singles = (H - X2B - X3B - HR)/pa, bb = BB/pa) %>%
   filter(pa >= 100) %>%
@@ -40,30 +47,40 @@ p_bb <- mean(scale(ball$bb)*scale(ball$bb_avg))
 p_singles
 p_bb
 
-avgsingles <-mean(female_heights$mother)
-momsd <- sd(female_heights$mother)
-avgdau <- mean(female_heights$daughter)
-dausd <- sd(female_heights$daughter)
+ball %>% 
+  ggplot(aes(singles, singles_avg)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+ball %>% 
+  ggplot(aes(bb, bb_avg))+
+  geom_point()+
+  geom_smooth(method = "lm")
 
-corr <- mean(scale(female_heights$mother)*scale(female_heights$daughter))
-m <- corr*drought/monsum
+guess <- ball %>% lm(singles ~ singles_avg, data = .)
+guess
+s_hat <- predict(guess, se.fit = TRUE)
+s_hat
 
-#slope
-corr*dausd/momsd
+wiffle <- ball %>% lm(bb ~ bb_avg, data = .)
+wiffle
 
-#intercept
-b <- avgmom-m*avgdau
+names(s_hat)
 
-# inch change
-momsd/dausd
+# plot predictions and confidence intervals
+galton_heights %>% ggplot(aes(son, father)) +
+  geom_point() +
+  geom_smooth(method = "lm")
 
-avgmom+corr*(60-avgdau)/dausd*momsd
-(corr^2)
+# predict Y directly
+fit <- galton_heights %>% lm(son ~ father, data = .) 
+Y_hat <- predict(fit, se.fit = TRUE)
+names(Y_hat)
 
+# plot best fit line
+galton_heights %>%
+  mutate(Y_hat = predict(lm(son ~ father, data=.))) %>%
+  ggplot(aes(father, Y_hat))+
+  geom_line()
 
-
-
-
-
-
-
+ball
+head(bat_02)

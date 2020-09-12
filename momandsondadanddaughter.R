@@ -1,34 +1,3 @@
-library(broom)
-dat2 <- Teams %>% filter(yearID %in% 1961:2001) %>%
-  mutate(HR = round(HR/G, 1), 
-         BB = BB/G,
-         R = R/G) %>%
-  select(HR, BB, R) %>%
-  filter(HR >= 0.4 & HR<=1.2)
-get_slope <- function(data) {
-  fit <- lm(R ~ BB, data = data)
-  sum.fit <- summary(fit)
-  
-  data.frame(slope = sum.fit$coefficients[2, "Estimate"], 
-             se = sum.fit$coefficients[2, "Std. Error"],
-             pvalue = sum.fit$coefficients[2, "Pr(>|t|)"])
-}
-
-dat2 %>% 
-  group_by(HR) %>% 
-  do(get_slope(.))
-
-dat <- Teams %>% filter(yearID %in% 1961:2001) %>%
-  mutate(HR = HR/G,
-         R = R/G) %>%
-  select(lgID, HR, BB, R) 
-
-dat %>% 
-  group_by(lgID) %>% 
-  do(tidy(lm(R ~ HR, data = .), conf.int = T)) %>% 
-  filter(term == "HR") 
-
-library(tidyverse)
 library(HistData)
 data("GaltonFamilies")
 set.seed(1) # if you are using R 3.5 or earlier
@@ -45,3 +14,47 @@ galton %>%
   group_by(pair) %>% 
   summarize(n = n())
 
+
+# # from book
+# cors <- galton_heights %>% 
+#   gather(parent, parentHeight, father:mother) %>%
+#   mutate(child = ifelse(gender == "female", "daughter", "son")) %>%
+#   unite(pair, c("parent", "child")) %>% 
+#   group_by(pair) %>%
+#   summarize(cor = cor(parentHeight, childHeight))
+
+
+galton %>% group_by(pair) %>% summarize(cor = cor(parentHeight, childHeight))
+
+get_slope <- function(data) {
+  fit <- lm(childHeight ~ parentHeight, data = data)
+  sum.fit <- summary(fit)
+  
+  data.frame(slope = sum.fit$coefficients[2, "Estimate"], 
+             se = sum.fit$coefficients[2, "Std. Error"],
+             pvalue = sum.fit$coefficients[2, "Pr(>|t|)"])
+}
+galton %>% group_by(pair) %>% do(get_slope(.))
+
+galton %>% 
+  group_by(pair) %>% 
+  do(tidy(lm(childHeight ~ parentHeight, data = .), conf.int = TRUE)) %>% 
+  filter(term == "parentHeight") %>% 
+  select(pair, estimate, conf.low, conf.high) %>% 
+  ggplot(aes(pair, y = estimate, ymin = conf.low, ymax = conf.high)) +
+  geom_errorbar() +
+  geom_point()
+int<-galton %>% 
+  group_by(pair) %>% 
+  do(tidy(lm(childHeight ~ parentHeight, data = .), conf.int = TRUE)) %>% 
+  filter(term == "parentHeight") %>% 
+  select(pair, estimate, conf.low, conf.high)
+
+
+# below to show the size of the conf int
+int %>% mutate(innner = conf.high - conf.low)
+
+#when they talk about p value they are talking about the se in this table
+galton %>% 
+  group_by(pair) %>% 
+  do(tidy(lm(childHeight ~ parentHeight, data = .)))

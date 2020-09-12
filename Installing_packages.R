@@ -9,6 +9,7 @@ library(textdata)
 library(gutenbergr)
 library(pdftools)
 library(tidytext)
+library(broom)
 
 install.packages("gutenbergr")
 install.packages("pdftools")

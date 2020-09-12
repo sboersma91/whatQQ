@@ -54,7 +54,7 @@ int<-galton %>%
 # below to show the size of the conf int
 int %>% mutate(innner = conf.high - conf.low)
 
-#when they talk about p value they are talking about the se in this table
+
 galton %>% 
   group_by(pair) %>% 
   do(tidy(lm(childHeight ~ parentHeight, data = .)))

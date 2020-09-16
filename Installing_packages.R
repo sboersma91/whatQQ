@@ -10,7 +10,7 @@ install.packages("stringr")
 install.packages("tidytext")
 install.packages("dslabs")
 install.packages("Lahman")
-
+install.packages("caret")
 
 
 
@@ -23,4 +23,4 @@ library(gutenbergr)
 library(pdftools)
 library(tidytext)
 library(broom)
-
+library(caret)

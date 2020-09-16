@@ -85,7 +85,6 @@ pls <- predict(jim, newdata = slim)
 cor(jim$avg_attendance,teams_small2$avg_attendance )
 
 collins_bo
-cor(collins_bo, jim$avg_attendance
-    )
+cor(collins_bo, jim$avg_attendance)
 collins_bo %>% pull(estimate)
 fit

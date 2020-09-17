@@ -5,7 +5,7 @@ teams_small <- Teams %>%
   filter(yearID %in% 1961:2001) %>% 
   mutate(avg_attendance = attendance/G)
 
-teams_small2 <- Teams_small %>% 
+teams_small2 <- teams_small %>% 
   mutate(avg_R = R/G, avg_HR = HR/G)
 
 
@@ -64,6 +64,10 @@ W_strat %>%
 strat9 %>% 
   ggplot(aes(avg_R,avg_attendance))+
   geom_point()
+
+# -----------------------------------------
+
+
 
 head(teams_small2)
 teams_small2 %>% select(avg_attendance, avg_HR, avg_R, yearID)

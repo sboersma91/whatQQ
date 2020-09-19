@@ -42,7 +42,7 @@ foo <- function(x){
   })
 }
 predictions <- apply(train[,-5],2,foo)
-sapply(predictions,max)	
+sapply(predictions,which.max)	
 
 
 # question 9
@@ -53,6 +53,8 @@ cutoffs <-rangedValues[which(predictions==max(predictions))]
 y_hat <- ifelse(test[,3]>cutoffs[1],'virginica','versicolor')
 mean(y_hat==test$Species)
 
+train[,3]
+head(train)
 # question 10
 foo <- function(x){
   rangedValues <- seq(range(x)[1],range(x)[2],by=0.1)

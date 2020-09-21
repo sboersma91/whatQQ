@@ -1,5 +1,9 @@
 # walthrough --- don't touch this one 
 
+iris <- iris[-which(iris$Species=='setosa'),]
+y <- iris$Species
+
+
 # Q7 train and test versions of data #splitting 
 
 set.seed(2, sample.kind="Rounding") # if using R 3.6 or later

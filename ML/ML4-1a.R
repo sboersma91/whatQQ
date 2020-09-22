@@ -13,12 +13,8 @@ test_index <- createDataPartition(tissue_gene_expression$y, times = 1, p = 0.5, 
 train_set_x <- tissue_gene_expression$x[-test_index,]
 train_set_y <- tissue_gene_expression$y[-test_index]
 
-
 train_set <- list(x = train_set_x, y = train_set_y)
-
-
-length(train_set$x)
-length(train_set$y)
+# attempted to use data.frame ehre but that dropped a whole half of data
 
 
 test_set_x <- tissue_gene_expression$x[test_index,]

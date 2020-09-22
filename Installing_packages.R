@@ -11,7 +11,7 @@ install.packages("tidytext")
 install.packages("dslabs")
 install.packages("Lahman")
 install.packages("caret")
-
+install.packages("e1071")
 
 
 library(tidyverse)
@@ -24,3 +24,5 @@ library(pdftools)
 library(tidytext)
 library(broom)
 library(caret)
+
+

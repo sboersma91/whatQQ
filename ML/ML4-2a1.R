@@ -41,3 +41,13 @@ zed <- x[,ind]
 head(zed)
 zed_fit <- train(zed, y, method = "glm")
 zed_fit$results$Accuracy
+
+fit <- train(x_subset, y, method = "knn", tuneGrid = data.frame(k = seq(101, 301, 25)))
+ggplot(fit)
+
+kxk <- seq(1,7,2)
+
+library(dslabs)
+data("tissue_gene_expression")
+head(tissue_gene_expression)
+train(tissue_gene_expression$x, tissue_gene_expression$y, method = "knn", tuneGrid = data.frame(k = seq(1,7,2)))

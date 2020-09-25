@@ -29,3 +29,9 @@ library(caret)
 
 # install.packages("BiocManager")
 # BiocManager::install("genefilter")
+
+# resetting everything notes - clear your console (Ctrl-L),
+# clear your workspace/environment and restart R (which I beleive means you shouldn't save the workspace)
+
+
+

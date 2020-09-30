@@ -113,8 +113,9 @@ votes <- rowMeans(pred[,ind] == "7")
 y_hat <- ifelse(votes>=0.5, 7, 2)
 mean(y_hat == mnist_27$test$y)
 
-
-
+votes
+length(votes)
+pred
 
 
 

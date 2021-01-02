@@ -1,2 +1,2 @@
 # whatQQ
-the remake 
+Figuring it all out one line at a time.
